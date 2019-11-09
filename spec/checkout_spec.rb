@@ -20,11 +20,11 @@ describe 'Checkout .total' do
     co.add(item2)
 
     co2 = Checkout.new(rules)
-    co2.add(item2)
-    co2.add(item2)
+    counter = 6
+    counter.times { co2.add(item2) }
 
     expect(co.total).to eq(rules[:drop_of_cash][:price] + item2.price)
-    expect(co2.total).to eq(rules[:drop_of_cash][:price])
+    expect(co2.total).to eq(rules[:drop_of_cash][:price] * (counter / rules[:drop_of_cash][:amount]))
   end
 
   it 'drop_of_percent and drop_of_cash' do

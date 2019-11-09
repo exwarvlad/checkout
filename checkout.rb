@@ -25,8 +25,11 @@ class Checkout
 
   def check_drop_of_cash(items_counter, item_price)
     if items_counter >= @drop_of_cash[:amount]
-      new_price = (items_counter / @drop_of_cash[:amount]) * @drop_of_cash[:price]
-      old_price = (items_counter - (items_counter - @drop_of_cash[:amount])) * item_price
+      promotional_sets_size = items_counter / @drop_of_cash[:amount]
+      promotional_items_count = promotional_sets_size * @drop_of_cash[:amount]
+
+      new_price = promotional_sets_size * @drop_of_cash[:price]
+      old_price = promotional_items_count * item_price
       @discount_of_cash = old_price - new_price
     end
   end
